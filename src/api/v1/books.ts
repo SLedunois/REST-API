@@ -23,8 +23,12 @@ router
     next();
   })
   .get((req: Request, res: Response) => {
-    // Returns 200 OK.
-    res.status(HTTP_STATUS.OK).json(collection.getAll());
+    try {
+      // Returns 200 OK.
+      res.status(HTTP_STATUS.OK).json(collection.getAll());
+    } catch (err) {
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).end();
+    }
   })
   .post((req: Request, res: Response) => {
     try {

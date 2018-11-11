@@ -9,3 +9,15 @@ export const HTTP_STATUS = {
   CONFLIT: 409,
   INTERNAL_SERVER_ERROR: 500
 };
+
+export const MESSAGES = {
+  INTERNAL_SERVER_ERROR: {
+    message: "An internal error occurred. Please retry later."
+  },
+  NOT_FOUND: {
+    message: "Resource not found."
+  },
+  CONFLIT: {
+    message: "The resource was already updated by a third party."
+  }
+};

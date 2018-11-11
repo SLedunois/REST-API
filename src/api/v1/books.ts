@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { HTTP_STATUS } from "../../http_utils";
+import { HTTP_STATUS, MESSAGES } from "../../http_utils";
 
 import { Book } from "../../model/Book";
 import { Books } from "../../service/Book";
@@ -27,7 +27,9 @@ router
       // Returns 200 OK.
       res.status(HTTP_STATUS.OK).json(collection.getAll());
     } catch (err) {
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).end();
+      res
+        .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+        .json(MESSAGES.INTERNAL_SERVER_ERROR);
     }
   })
   .post((req: Request, res: Response) => {
@@ -44,8 +46,9 @@ router
         .end();
     } catch (err) {
       // Returns 500 Interal Server Error if failed.
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).end();
-      console.error(err);
+      res
+        .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+        .json(MESSAGES.INTERNAL_SERVER_ERROR);
     }
   });
 
@@ -56,7 +59,7 @@ router
     if (book) {
       res.status(HTTP_STATUS.OK).json(book);
     } else {
-      res.status(HTTP_STATUS.NOT_FOUND).json({ message: "Resource not found" });
+      res.status(HTTP_STATUS.NOT_FOUND).json(MESSAGES.NOT_FOUND);
     }
   })
   .post((req: Request, res: Response) => {
@@ -70,7 +73,7 @@ router
     // Returns 400 Bad Request
     if (!name || !author) {
       res.status(HTTP_STATUS.BAD_REQUEST).json({
-        message: "Body should contains name and author field"
+        message: "Body should contains name and author field."
       });
     }
 
@@ -93,7 +96,9 @@ router
       res.status(HTTP_STATUS.NO_CONTENT).end();
     } catch (err) {
       // Returns 500 Internal Server Error
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).end();
+      res
+        .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+        .json(MESSAGES.INTERNAL_SERVER_ERROR);
       console.error(err);
     }
   });

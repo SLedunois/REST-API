@@ -1,9 +1,9 @@
-import express from "express";
+import express, { Application } from "express";
 import v1 from "./api/v1";
 
 const port = process.env.port || 3000;
 
-const App = express();
+const App: Application = express();
 App.use(express.json());
 
 App.use("/v1", v1);
